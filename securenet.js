@@ -52,6 +52,19 @@ allFields.createPaymentMethod = {
   }
 };
 
+allFields.createCharge = {
+  amount: 11.00,
+  paymentVaultToken: {
+    customerId: '1231',
+    paymentMethodId: '1',
+    paymentType: 'CREDIT_CARD'
+  },
+  developerApplication: {
+    developerId: 12345678,
+    Version: '1.2'
+  }
+};
+
 module.exports = function( props ){
   var baseUrl = 'https://gwapi.demo.securenet.com/api/';
   var authString = "Basic " + new Buffer(props.securenetid + ":" + props.securekey).toString('base64');
@@ -67,6 +80,9 @@ module.exports = function( props ){
     switch(resource){
       case 'PaymentMethod':
         reqOptions.url = baseUrl + 'Customers/' + clientData.customerId + "/" + resource;
+        break;
+      case 'Charge':
+        reqOptions.url = baseUrl + 'Payments/' + resource;
         break;
       default:
         reqOptions.url = baseUrl + resource;
@@ -96,6 +112,9 @@ module.exports = function( props ){
     },
     createPaymentMethod: function(paymentInfo, cb){
       sendRequest('create', 'PaymentMethod', paymentInfo, cb);
+    },
+    charge: function(chargeInfo, cb){
+      sendRequest('create', 'Charge', chargeInfo, cb);
     }
   };
   return securenet;

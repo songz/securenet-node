@@ -46,6 +46,24 @@ securenet.createPaymentMethod( {
   console.log(res);
 });
 
+securenet.charge( {
+  amount: 11.00,
+  paymentVaultToken: {
+    customerId: '5000010',
+    paymentMethodId: '1',
+    paymentType: 'CREDIT_CARD'
+  },
+  developerApplication: {
+    developerId: 12345678,
+    Version: '1.2'
+  }
+}, function(err, res){
+  if(err){
+    return console.log(err);
+  }
+  console.log(res);
+});
+
 ```
 
 
