@@ -24,7 +24,9 @@ securenet.createCustomer( {
   }
   console.log(res);
 });
+```
 
+```js
 securenet.createPaymentMethod( {
  customerId: '5000010',
   card: {
@@ -45,7 +47,9 @@ securenet.createPaymentMethod( {
   }
   console.log(res);
 });
+```
 
+```js
 securenet.charge( {
   amount: 11.00,
   paymentVaultToken: {
@@ -63,7 +67,6 @@ securenet.charge( {
   }
   console.log(res);
 });
-
 ```
 
 
