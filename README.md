@@ -15,13 +15,15 @@ var securenet = require('securenet')({
 ```
 
 ```js
-securenet.customers.create(
-  { email: 'customer@example.com' },
-  function(err, customer) {
-    err; // null if no error occurred
-    customer; // the created customer object
+securenet.createCustomer( {
+  firstName: 'Test',
+  lastName: 'Tester'
+}, function(err, res){
+  if(err){
+    return console.log(err);
   }
-);
+  console.log(res);
+});
 ```
 
 
