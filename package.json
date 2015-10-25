@@ -1,0 +1,25 @@
+{
+  "name": "securenet-node",
+  "version": "0.0.1",
+  "description": "nodejs sdk for securenet gateway for payment ",
+  "main": "securenet.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/songz/securenet-node.git"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "securenet",
+    "worldpay"
+  ],
+  "author": "Song Zheng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/songz/securenet-node/issues"
+  },
+  "homepage": "https://github.com/songz/securenet-node#readme"
+}
