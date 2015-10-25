@@ -2,8 +2,8 @@
 
 var request = require('request');
 
-var defaults = {};
-defaults.Customers = {
+var allFields = {};
+allFields.createCustomers = {
   firstName: 'Test',
   lastName: 'Tester',
   address: {},
@@ -12,6 +12,34 @@ defaults.Customers = {
   sendEmailReceipts: true,
   notes: 'This is test notes',
   company: 'Test company',            
+  userDefinedFields: [
+    {udfname:'udf1', udfvalue: 'udf1_value'},
+    {udfname:'udf2', udfvalue: 'udf2_value'},
+    {udfname:'udf3', udfvalue: 'udf3_value'},
+    {udfname:'udf4', udfvalue: 'udf4_value'}
+  ],
+  developerApplication: {
+    developerId: 12345678,
+    Version: '1.2'
+  }
+};
+
+allFields.createPaymentMethod = {
+  customerId: '',
+  card: {
+    number: '4444 3333 2222 1111',
+    expirationDate: '04/2016',
+    address: {
+      line1: '123 Main St.',
+      city: 'Austin',
+      state: 'TX',
+      zip: '78759'
+    }
+  },
+  phone: '512-250-7865',
+  notes: 'Create a vault account',
+  accountDuplicateCheckIndicator: 0,
+  primary: true,
   userDefinedFields: [
     {udfname:'udf1', udfvalue: 'udf1_value'},
     {udfname:'udf2', udfvalue: 'udf2_value'},
@@ -36,8 +64,14 @@ module.exports = function( props ){
   };
 
   function sendRequest(type, resource, clientData, cb){
-    reqOptions.url = baseUrl + resource;
-    var bodyValues = defaults[resource];
+    switch(resource){
+      case 'PaymentMethod':
+        reqOptions.url = baseUrl + 'Customers/' + clientData.customerId + "/" + resource;
+        break;
+      default:
+        reqOptions.url = baseUrl + resource;
+    }
+    var bodyValues = allFields[type + resource];
     for(var k in bodyValues){
       if(clientData[k]){
         bodyValues[k] = clientData[k];
@@ -59,6 +93,9 @@ module.exports = function( props ){
   var securenet = {
     createCustomer: function(customerInfo, cb){
       sendRequest('create', 'Customers', customerInfo, cb);
+    },
+    createPaymentMethod: function(paymentInfo, cb){
+      sendRequest('create', 'PaymentMethod', paymentInfo, cb);
     }
   };
   return securenet;

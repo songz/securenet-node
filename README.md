@@ -24,6 +24,28 @@ securenet.createCustomer( {
   }
   console.log(res);
 });
+
+securenet.createPaymentMethod( {
+ customerId: '5000010',
+  card: {
+    number: '4444 3333 2222 1111',
+    expirationDate: '04/2016',
+    address: {
+      line1: '123 Main St.',
+      city: 'Austin',
+      state: 'TX',
+      zip: '78759'
+    },
+  },
+  phone: '512-250-7865',
+  primary: true,
+}, function(err, res){
+  if(err){
+    return console.log(err);
+  }
+  console.log(res);
+});
+
 ```
 
 
